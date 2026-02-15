@@ -8,6 +8,8 @@ type Props = {
   type?: string;
   placeholder?: string;
   value?: string;
+  readOnly?: boolean;
+  disabled?: boolean;
   onChange?: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   >;
@@ -21,6 +23,8 @@ export function FormInput({
   type = "text",
   placeholder,
   value,
+  readOnly,
+  disabled,
   onChange,
   as = "input",
   children,
@@ -36,6 +40,8 @@ export function FormInput({
           name={name}
           placeholder={placeholder}
           value={value}
+          readOnly={readOnly}
+          disabled={disabled}
           onChange={onChange}
           className={cn(
             "min-h-[96px] w-full rounded-2xl border border-white/40 bg-gradient-to-br from-white/35 via-white/20 to-white/10 px-4 py-3 text-base text-ink-900 shadow-2xl shadow-black/[0.06] outline-none backdrop-blur-2xl transition-all duration-300 placeholder:text-ink-800/90 focus:border-moss-400/60 focus:ring-2 focus:ring-moss-400/25 dark:border-white/20 dark:from-white/15 dark:via-white/10 dark:to-white/5 dark:text-slate-100 dark:placeholder:text-slate-900/80",
@@ -45,6 +51,7 @@ export function FormInput({
         <select
           name={name}
           value={value}
+          disabled={disabled}
           onChange={onChange}
           className={cn(
             "w-full rounded-2xl border border-white/40 bg-gradient-to-br from-white/35 via-white/20 to-white/10 px-4 py-3 text-base text-ink-900 shadow-2xl shadow-black/[0.06] outline-none backdrop-blur-2xl transition-all duration-300 focus:border-moss-400/60 focus:ring-2 focus:ring-moss-400/25 dark:border-white/20 dark:from-white/15 dark:via-white/10 dark:to-white/5 dark:text-slate-900",
@@ -58,6 +65,8 @@ export function FormInput({
           type={type}
           placeholder={placeholder}
           value={value}
+          readOnly={readOnly}
+          disabled={disabled}
           onChange={onChange}
           className={cn(
             "w-full rounded-2xl border border-white/40 bg-gradient-to-br from-white/35 via-white/20 to-white/10 px-4 py-3 text-base text-ink-900 shadow-2xl shadow-black/[0.06] outline-none backdrop-blur-2xl transition-all duration-300 placeholder:text-ink-800/90 focus:border-moss-400/60 focus:ring-2 focus:ring-moss-400/25 dark:border-white/20 dark:from-white/15 dark:via-white/10 dark:to-white/5 dark:text-slate-900 dark:placeholder:text-slate-900/80",

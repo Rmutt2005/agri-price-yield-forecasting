@@ -43,12 +43,7 @@ export function DashboardShell({ title, children }: Props) {
             />
           </div>
 
-          <div className="p-4 lg:p-6">
-            <div className="mb-4 rounded-3xl border border-white/40 bg-white/25 p-4 text-base text-ink-700 shadow-xl shadow-black/[0.04] backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-200 lg:hidden">
-              เมนูด้านซ้ายจะแสดงในหน้าจอใหญ่ (Prototype)
-            </div>
-            {children}
-          </div>
+          <div className="p-4 lg:p-6">{children}</div>
         </div>
       </div>
     </div>

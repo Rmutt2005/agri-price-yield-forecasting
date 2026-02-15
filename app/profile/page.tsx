@@ -13,6 +13,8 @@ export default function ProfilePage() {
   const [editing, setEditing] = React.useState(false);
   const [fullName, setFullName] = React.useState(mockUser.fullName);
   const [email, setEmail] = React.useState(mockUser.email);
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
   return (
     <DashboardShell title="โปรไฟล์">
@@ -61,6 +63,8 @@ export default function ProfilePage() {
               name="fullName"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+              type="text"
+              readOnly={!editing}
             />
             <FormInput
               label="อีเมล"
@@ -68,6 +72,26 @@ export default function ProfilePage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              readOnly={!editing}
+            />
+
+            <FormInput
+              label="รหัสผ่านใหม่"
+              name="password"
+              type="password"
+              placeholder={editing ? "กรอกรหัสผ่านใหม่" : "••••••••"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              readOnly={!editing}
+            />
+            <FormInput
+              label="ยืนยันรหัสผ่านใหม่"
+              name="confirmPassword"
+              type="password"
+              placeholder={editing ? "ยืนยันรหัสผ่านใหม่" : "••••••••"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              readOnly={!editing}
             />
           </div>
 

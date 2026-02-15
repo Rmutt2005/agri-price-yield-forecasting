@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, Leaf, ShieldCheck, Sprout } from "lucide-react";
+import { ArrowRight, Leaf, Moon, ShieldCheck, Sprout, Sun } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { useTheme } from "@/components/layout/ThemeClient";
 
 export default function LandingPage() {
+  const { theme, toggle } = useTheme();
+
   return (
     <main className="min-h-screen">
       <div className="relative overflow-hidden">
@@ -13,9 +18,26 @@ export default function LandingPage() {
             <div className="w-full max-w-xl">
               <div className="rounded-3xl border border-white/40 bg-white/25 p-7 shadow-xl shadow-black/[0.04] backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-black/[0.07] dark:border-white/10 dark:bg-white/5">
                 <div className="max-w-2xl">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-4 py-1.5 text-base text-ink-700 shadow-xl shadow-black/[0.04] backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                    <Leaf className="h-4 w-4" />
-                    (UI เท่านั้น)
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-4 py-1.5 text-base text-ink-700 shadow-xl shadow-black/[0.04] backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+                      <Leaf className="h-4 w-4" />
+                      (UI เท่านั้น)
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={toggle}
+                      className="rounded-full"
+                      leftIcon={
+                        theme === "dark" ? (
+                          <Sun className="h-4 w-4" />
+                        ) : (
+                          <Moon className="h-4 w-4" />
+                        )
+                      }
+                    >
+                      {theme === "dark" ? "Light" : "Dark"}
+                    </Button>
                   </div>
                   <h1 className="mt-6 text-3xl font-semibold leading-[1.18] text-ink-900 dark:text-slate-100 sm:text-4xl lg:text-5xl">
                     ระบบวิเคราะห์พยากรณ์ราคาและผลผลิตทางการเกษตร
