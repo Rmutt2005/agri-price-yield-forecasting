@@ -18,9 +18,6 @@ export default function RegisterPage() {
           <div className="text-2xl font-semibold text-ink-900 dark:text-slate-100">
             สมัครสมาชิก
           </div>
-          <div className="mt-2 text-base text-ink-500 dark:text-slate-300">
-            Prototype UI • ไม่ต้องยืนยันข้อมูล
-          </div>
         </div>
 
         <Card className="p-7">
@@ -79,7 +76,7 @@ export default function RegisterPage() {
             </div>
 
             <Button type="submit" className="mt-2">
-              สร้างบัญชีและไปยังแดชบอร์ด
+              สร้างบัญชีและเข้าสู่ระบบ
             </Button>
 
             <div className="text-center text-base text-ink-500 dark:text-slate-300">

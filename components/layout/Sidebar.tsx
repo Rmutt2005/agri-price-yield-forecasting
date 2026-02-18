@@ -33,7 +33,7 @@ export function Sidebar({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 md:hidden",
+          "fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden",
           mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         onClick={onCloseMobile}
@@ -41,8 +41,11 @@ export function Sidebar({
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-50 m-4 flex h-[90vh] flex-col rounded-3xl border border-white/20 bg-white/10 shadow-xl shadow-black/[0.10] backdrop-blur-xl transition-all duration-300 ease-in-out md:static md:z-auto md:h-auto md:shadow-xl md:shadow-black/[0.08]",
-          "dark:border-white/10 dark:bg-white/5",
+          "fixed left-0 top-0 z-50 m-4 flex h-[90vh] flex-col rounded-3xl border border-white/20",
+          "bg-white/80 md:bg-white/10",
+          "dark:bg-slate-900/80 md:dark:bg-white/5",
+          "shadow-xl shadow-black/[0.10] backdrop-blur-xl transition-all duration-300 ease-in-out",
+          "md:static md:z-auto md:h-auto md:shadow-xl md:shadow-black/[0.08]",
           "w-64 md:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-[110%]",
           expanded ? "md:w-64" : "md:w-16",
@@ -111,9 +114,7 @@ export function Sidebar({
             "mt-auto px-5 pb-6 text-base text-slate-500 dark:text-slate-400 transition-all duration-300",
             expanded ? "opacity-100" : "h-0 overflow-hidden opacity-0",
           )}
-        >
-          Prototype • ไม่มีระบบหลังบ้าน
-        </div>
+        ></div>
       </aside>
     </>
   );

@@ -18,9 +18,6 @@ export default function LoginPage() {
           <div className="text-2xl font-semibold text-ink-900 dark:text-slate-100">
             เข้าสู่ระบบ
           </div>
-          <div className="mt-2 text-base text-ink-500 dark:text-slate-300">
-            Prototype UI • กรอกข้อมูลใดก็ได้แล้วไปต่อได้ทันที
-          </div>
         </div>
 
         <Card className="p-7">

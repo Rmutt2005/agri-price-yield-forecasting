@@ -27,7 +27,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <div className="text-base text-ink-500/80 dark:text-slate-300/70">
-                  ข้อมูลผู้ใช้ (Mock)
+                  ข้อมูลผู้ใช้
                 </div>
                 <div className="text-lg font-semibold text-ink-900 dark:text-slate-100">
                   {fullName}
@@ -97,12 +97,12 @@ export default function ProfilePage() {
 
           {!editing ? (
             <div className="mt-4 rounded-3xl border border-white/30 bg-white/20 p-4 text-base text-ink-500 backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-              เปิดโหมดแก้ไขเพื่อปรับข้อมูล (UI เท่านั้น ไม่มีการบันทึกจริง)
+              เปิดโหมดแก้ไขเพื่อปรับข้อมูล
             </div>
           ) : null}
 
           <div className="mt-6 text-base text-ink-500/80 dark:text-slate-300/70">
-            สถานะ: <span className="font-medium">Prototype</span>
+            สถานะ: <span className="font-medium">ผู้ใช้งานทั่วไป</span>
           </div>
         </Card>
       </div>

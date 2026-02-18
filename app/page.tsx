@@ -18,11 +18,7 @@ export default function LandingPage() {
             <div className="w-full max-w-xl">
               <div className="rounded-3xl border border-white/40 bg-white/25 p-7 shadow-xl shadow-black/[0.04] backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-black/[0.07] dark:border-white/10 dark:bg-white/5">
                 <div className="max-w-2xl">
-                  <div className="mb-4 flex items-center justify-between gap-3">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-4 py-1.5 text-base text-ink-700 shadow-xl shadow-black/[0.04] backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                      <Leaf className="h-4 w-4" />
-                      (UI เท่านั้น)
-                    </div>
+                  <div className="mb-4 flex items-center justify-end gap-3">
                     <Button
                       type="button"
                       variant="ghost"

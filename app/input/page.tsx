@@ -59,14 +59,7 @@ export default function CropInputPage() {
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
               >
-                {[
-                  "พื้นที่ที่ 1",
-                  "พื้นที่ที่ 2",
-                  "พื้นที่ที่ 3",
-                  "พื้นที่ที่ 4",
-                  "พื้นที่ที่ 5",
-                  "พื้นที่ที่ 6",
-                ].map((v) => (
+                {["พื้นที่ที่ 1", "พื้นที่ที่ 2", "พื้นที่ที่ 3"].map((v) => (
                   <option key={v} value={v}>
                     {v}
                   </option>
@@ -78,12 +71,34 @@ export default function CropInputPage() {
                 name="size"
                 placeholder="เช่น 10"
               />
+            </div>
 
-              <div className="rounded-3xl border border-white/30 bg-white/20 p-4 text-base text-ink-500 backdrop-blur-lg dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-                ฟอร์มนี้เป็น Prototype UI เท่านั้น:
-                กรอกค่าใดก็ได้แล้วกดบันทึกเพื่อกลับไปหน้าแดชบอร์ด
+            <div className="grid gap-4">
+              <div className="flex items-center gap-2 text-base font-semibold text-ink-900 dark:text-slate-100">
+                <Wallet className="h-4 w-4" />
+                ต้นทุนการผลิต
               </div>
 
+              <FormInput
+                label="ค่าปุ๋ย (บาท/ไร่)"
+                name="fertilizer"
+                placeholder="เช่น 16000"
+              />
+              <FormInput
+                label="ค่ายาและสารเคมี (บาท/ไร่)"
+                name="chemical"
+                placeholder="เช่น 12000"
+              />
+              <FormInput
+                label="ค่าแรงงาน (บาท/ไร่)"
+                name="labor"
+                placeholder="เช่น 13000"
+              />
+              <FormInput
+                label="ค่าใช้จ่ายอื่น ๆ (บาท/ไร่)"
+                name="other"
+                placeholder="เช่น 2000"
+              />
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button
                   type="submit"
@@ -99,34 +114,6 @@ export default function CropInputPage() {
                   ยกเลิก
                 </Button>
               </div>
-            </div>
-
-            <div className="grid gap-4">
-              <div className="flex items-center gap-2 text-base font-semibold text-ink-900 dark:text-slate-100">
-                <Wallet className="h-4 w-4" />
-                ต้นทุนการผลิต
-              </div>
-
-              <FormInput
-                label="ค่าปุ๋ย (บาท)"
-                name="fertilizer"
-                placeholder="เช่น 16000"
-              />
-              <FormInput
-                label="ค่ายาและสารเคมี (บาท)"
-                name="chemical"
-                placeholder="เช่น 12000"
-              />
-              <FormInput
-                label="ค่าแรงงาน (บาท)"
-                name="labor"
-                placeholder="เช่น 13000"
-              />
-              <FormInput
-                label="ค่าใช้จ่ายอื่น ๆ (บาท)"
-                name="other"
-                placeholder="เช่น 2000"
-              />
             </div>
           </div>
         </form>
