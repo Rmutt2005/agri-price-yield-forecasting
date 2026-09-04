@@ -1,18 +1,26 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, LogOut, Sprout, User } from "lucide-react";
+import { LayoutDashboard, LogOut, Settings, ShieldCheck, Sprout, User } from "lucide-react";
 
 import { cn } from "@/components/ui/cn";
-import { mockUser } from "@/lib/mockData";
+import type { AuthUser } from "@/lib/repositories/authRepository";
+import type { UserRole } from "@/lib/domain/types";
 
-const links = [
+const coreLinks = [
   { href: "/dashboard", label: "หน้าหลัก", icon: LayoutDashboard },
   { href: "/input", label: "กรอกข้อมูลการเพาะปลูก", icon: Sprout },
   { href: "/profile", label: "โปรไฟล์", icon: User },
-  { href: "/", label: "ออกจากระบบ", icon: LogOut },
 ] as const;
+
+const managementLinks: readonly { href: string; label: string; icon: import("lucide-react").LucideIcon; roles: readonly UserRole[] }[] = [
+  { href: "/officer", label: "จัดการข้อมูลและโมเดล", icon: Settings, roles: ["OFFICER", "ADMIN"] },
+  { href: "/admin", label: "ตั้งค่าระบบ", icon: ShieldCheck, roles: ["ADMIN"] },
+];
+
+const logoutLink = { href: "/", label: "ออกจากระบบ", icon: LogOut } as const;
 
 type Props = {
   expanded: boolean;
@@ -28,6 +36,27 @@ export function Sidebar({
   onCloseMobile,
 }: Props) {
   const pathname = usePathname();
+  const [user, setUser] = React.useState<AuthUser | null>(null);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/me")
+      .then(async (response) => (response.ok ? (await response.json()) as { user: AuthUser } : null))
+      .then((payload) => {
+        if (!cancelled && payload?.user) setUser(payload.user);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  async function handleLogout(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (event.currentTarget.getAttribute("href") !== "/") return;
+    event.preventDefault();
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => undefined);
+    window.location.href = "/";
+  }
 
   return (
     <>
@@ -70,16 +99,20 @@ export function Sidebar({
             )}
           >
             <div className="text-base font-semibold leading-tight">
-              {mockUser.fullName}
+              {user?.fullName ?? "ผู้ใช้งาน"}
             </div>
             <div className="text-base text-slate-500 dark:text-slate-400">
-              {mockUser.email}
+              {user?.email ?? "ยังไม่ได้เข้าสู่ระบบ"}
             </div>
           </div>
         </button>
 
         <nav className={cn("px-3 pb-5", expanded ? "" : "px-2")}>
-          {links.map((l) => {
+          {[...
+            coreLinks,
+            ...managementLinks.filter((link) => user && link.roles.includes(user.role)),
+            logoutLink,
+          ].map((l) => {
             const active = pathname === l.href;
             const Icon = l.icon;
             return (
@@ -87,6 +120,7 @@ export function Sidebar({
                 key={l.href}
                 href={l.href}
                 onClick={onCloseMobile}
+                onClickCapture={l.href === "/" ? handleLogout : undefined}
                 className={cn(
                   "mb-1.5 flex items-center rounded-2xl py-2.5 text-base transition-all duration-300",
                   expanded ? "gap-3 px-4 justify-start" : "px-0 justify-center",

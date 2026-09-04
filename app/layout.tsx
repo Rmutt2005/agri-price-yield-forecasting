@@ -14,7 +14,7 @@ const prompt = Prompt({
 
 export const metadata: Metadata = {
   title: "ระบบวิเคราะห์พยากรณ์ราคาและผลผลิตทางการเกษตร",
-  description: "Thai Agricultural Decision Support System (UI prototype)",
+  description: "Agricultural Decision Support System for yield, price, disease risk and cultivation economics",
 };
 
 export default function RootLayout({

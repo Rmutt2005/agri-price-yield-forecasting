@@ -1,8 +1,9 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { KeyRound, Mail } from "lucide-react";
+import { AlertCircle, KeyRound, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -10,6 +11,34 @@ import { FormInput } from "@/components/ui/FormInput";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const payload = (await response.json()) as { message?: string };
+      if (!response.ok) {
+        throw new Error(payload.message ?? "เข้าสู่ระบบไม่สำเร็จ");
+      }
+      router.push("/dashboard");
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error ? submitError.message : "เข้าสู่ระบบไม่สำเร็จ",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="min-h-screen px-4 py-12 transition-colors duration-300">
@@ -21,13 +50,17 @@ export default function LoginPage() {
         </div>
 
         <Card className="p-7">
-          <form
-            className="grid gap-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              router.push("/dashboard");
-            }}
-          >
+          <form className="grid gap-4" onSubmit={handleSubmit}>
+            {error ? (
+              <div
+                role="alert"
+                className="flex items-start gap-2 rounded-2xl border border-rose-300/50 bg-rose-100/40 px-4 py-3 text-base text-rose-800 dark:border-rose-300/20 dark:bg-rose-950/30 dark:text-rose-200"
+              >
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                <span>{error}</span>
+              </div>
+            ) : null}
+
             <div className="grid gap-3">
               <div className="flex items-center gap-2 text-base font-medium text-ink-700 dark:text-slate-200">
                 <Mail className="h-4 w-4" />
@@ -37,6 +70,9 @@ export default function LoginPage() {
                 label=""
                 name="email"
                 type="email"
+                value={email}
+                disabled={loading}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="example@email.com"
               />
             </div>
@@ -50,12 +86,15 @@ export default function LoginPage() {
                 label=""
                 name="password"
                 type="password"
+                value={password}
+                disabled={loading}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
               />
             </div>
 
-            <Button type="submit" className="mt-2">
-              เข้าสู่ระบบ
+            <Button type="submit" className="mt-2" disabled={loading}>
+              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </Button>
 
             <div className="text-center text-base text-ink-500 dark:text-slate-300">
