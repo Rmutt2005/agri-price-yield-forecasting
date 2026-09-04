@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "seed:synthetic": "tsx scripts/seedSyntheticData.ts",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed:synthetic": "tsx scripts/seedSyntheticData.ts --db"
   },
   "keywords": [],
   "author": "",
@@ -16,12 +20,14 @@
   "dependencies": {
     "lucide-react": "^0.564.0",
     "next": "^14.2.35",
+    "pg": "^8.23.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "recharts": "^3.7.0"
   },
   "devDependencies": {
     "@types/node": "^25.2.3",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.20",
@@ -29,6 +35,8 @@
     "eslint-config-next": "^14.2.35",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.9.3"
+    "tsx": "^4.19.3",
+    "typescript": "^5.9.3",
+    "vitest": "^1.6.0"
   }
 }
